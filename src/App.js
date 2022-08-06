@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import "./App.css";
+import { incrementAction } from "./store/countReducer";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const count = useSelector((store) => store.countReducer.count);
+	const users = useSelector((store) => store.userReducer.users);
+	const dispatch = useDispatch();
+
+	return (
+		<div className="App">
+			<div className="count">{count}</div>
+			<div className="container">
+				<button className="btn" onClick={() => dispatch(incrementAction())}>
+					ИНКРЕМЕНТ++
+				</button>
+				<button className="btn">ДЕКРЕМЕНТ--</button>
+				<button className="btn">ПОЛУЧИТЬ ЮЗЕРОВ</button>
+			</div>
+		</div>
+	);
 }
 
 export default App;
